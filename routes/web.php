@@ -1,16 +1,13 @@
 <?php
+Route::get('/blogs', 'BlogController@index')->name('blog.list');
+Route::get('/blog/new', 'BlogController@create')->name('blog.new');
+Route::post('/blog', 'BlogController@store')->name('blog.store');
+Route::get('/blog/edit/{id}', 'BlogController@edit')->name('blog.edit');
+Route::post('/blog/update/{id}', 'BlogController@update')->name('blog.update');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/blog/{id}', 'BlogController@show')->name('blog.detail');
+Route::delete('/blog/{id}', 'BlogController@destroy')->name('blog.destroy');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/blogs');
 });
