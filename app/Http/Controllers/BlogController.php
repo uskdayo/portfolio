@@ -37,7 +37,11 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $blog = new Blog;
+        $blog->title = request('title');
+        $blog->content = request('content');
+        $blog->save();
+        return redirect()->route('blog.detail', ['id' => $blog->id]);
     }
 
     /**

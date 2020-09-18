@@ -17,4 +17,8 @@
                 <td>{{ $blog->created_at }}</td>
             </tr>
         @endforeach
+  </table>
+  <div>
+      <a href={{ route('blog.new') }} class='btn btn-outline-primary'>新規投稿</a>
+  <div>
 @endsection
