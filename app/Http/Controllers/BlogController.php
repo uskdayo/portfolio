@@ -25,7 +25,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        $blog = new Blog;
+        return view('new', ['blog' => $blog]);
     }
 
     /**
