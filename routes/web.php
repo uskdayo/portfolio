@@ -6,6 +6,7 @@ Route::get('/blog/edit/{id}', 'BlogController@edit')->name('blog.edit');
 Route::post('/blog/update/{id}', 'BlogController@update')->name('blog.update');
 
 Route::get('/blog/{id}', 'BlogController@show')->name('blog.detail');
+Route::delete('/blog/{id}', 'BlogController@destroy')->name('blog.destroy');
 
 Route::get('/', function () {
     return redirect('/blogs');

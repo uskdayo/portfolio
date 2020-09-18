@@ -8,6 +8,10 @@
     <div>
         <a href={{ route('blog.list') }}>一覧に戻る</a>
         | <a href={{ route('blog.edit', ['id' =>  $blog->id]) }}>編集</a>
+        <p></p>
+        {{ Form::open(['method' => 'delete', 'route' => ['blog.destroy', $blog->id]]) }}
+            {{ Form::submit('削除') }}
+        {{ Form::close() }}
     </div>
   
 @endsection
