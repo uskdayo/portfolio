@@ -62,9 +62,10 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit($id)
     {
-        //
+        $blog = Blog::find($id);
+        return view('edit', ['blog' => $blog]);
     }
 
     /**
@@ -74,9 +75,13 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id, Blog $blog)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->title = request('title');
+        $blog->content = request('content');
+        $blog->save();
+        return redirect()->route('blog.detail', ['id' => $blog->id]);
     }
 
     /**

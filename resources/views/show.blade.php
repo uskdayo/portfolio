@@ -7,6 +7,7 @@
     </div>
     <div>
         <a href={{ route('blog.list') }}>一覧に戻る</a>
+        | <a href={{ route('blog.edit', ['id' =>  $blog->id]) }}>編集</a>
     </div>
   
 @endsection
