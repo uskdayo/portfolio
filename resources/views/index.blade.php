@@ -8,7 +8,7 @@
         </tr>
         @foreach ($blogs as $blog)
             <tr>
-                <td>{{ $blog->id }}</td>
+                <td>{{ $blog->user->name }}</td>
                 <td>
                     <a href={{ route('blog.detail', ['id' =>  $blog->id]) }}>
                     {{ $blog->title }}
@@ -18,7 +18,9 @@
             </tr>
         @endforeach
   </table>
+  @auth
   <div>
       <a href={{ route('blog.new') }} class='btn btn-outline-primary'>新規投稿</a>
   <div>
+  @endauth
 @endsection

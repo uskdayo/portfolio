@@ -11,3 +11,7 @@ Route::delete('/blog/{id}', 'BlogController@destroy')->name('blog.destroy');
 Route::get('/', function () {
     return redirect('/blogs');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

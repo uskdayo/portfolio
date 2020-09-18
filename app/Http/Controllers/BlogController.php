@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +41,11 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $user = \Auth::user();
         $blog = new Blog;
         $blog->title = request('title');
         $blog->content = request('content');
+        $blog->user_id = $user->id;
         $blog->save();
         return redirect()->route('blog.detail', ['id' => $blog->id]);
     }
@@ -53,7 +59,13 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
-        return view('show', ['blog' => $blog]);
+        $user = \Auth::user();
+        if ($user) {
+            $login_user_id = $user->id;
+        } else {
+            $login_user_id = "";
+        }
+        return view('show', ['blog' => $blog, 'login_user_id' => $login_user_id]);
     }
 
     /**
