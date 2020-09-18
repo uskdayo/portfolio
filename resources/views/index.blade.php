@@ -8,7 +8,7 @@
         </tr>
         @foreach ($blogs as $blog)
             <tr>
-                <td>{{ $blog->id }}</td>
+                <td>{{ $blog->user->name }}</td>
                 <td>
                     <a href={{ route('blog.detail', ['id' =>  $blog->id]) }}>
                     {{ $blog->title }}
