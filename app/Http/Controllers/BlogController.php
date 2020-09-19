@@ -46,6 +46,8 @@ class BlogController extends Controller
         $blog = new Blog;
         $blog->title = request('title');
         $blog->content = request('content');
+        $filename=$request->file('thefile')->store('public'); 
+        $blog->image=str_replace('public/','',$filename); 
         $blog->user_id = $user->id;
         $blog->save();
         return redirect()->route('blog.detail', ['id' => $blog->id]);
@@ -93,6 +95,8 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->title = request('title');
         $blog->content = request('content');
+        $filename=$request->file('thefile')->store('public'); 
+        $blog->image=str_replace('public/','',$filename);
         $blog->save();
         return redirect()->route('blog.detail', ['id' => $blog->id]);
     }
