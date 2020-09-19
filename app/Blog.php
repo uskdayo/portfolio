@@ -12,7 +12,8 @@ class Blog extends Model
     [
         'title',
         'content',
-        'user_id'
+        'user_id',
+        'image'
     ];
 
     public function user()
