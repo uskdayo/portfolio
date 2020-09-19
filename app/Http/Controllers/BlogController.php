@@ -20,6 +20,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::all();
+        $blogs = \App\Blog::orderBy('created_at', 'desc')->paginate(20);
         return view('index', ['blogs' => $blogs]);
     }
 
