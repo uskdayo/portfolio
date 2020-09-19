@@ -3,6 +3,7 @@
   <h1>{{ $blog->title }}</h1>
   <div>
         <p>{{ $blog->created_at }}</p>
+        <p><img src="{{ asset('/storage/'.$blog->image)}}" max-width="500px", height="500px"></p>
         <p>{{ $blog->content }}</p>
     </div>
     <div>

@@ -20,6 +20,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::all();
+        $blogs = \App\Blog::orderBy('created_at', 'desc')->paginate(20);
         return view('index', ['blogs' => $blogs]);
     }
 
@@ -42,13 +43,25 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        $user = \Auth::user();
-        $blog = new Blog;
-        $blog->title = request('title');
-        $blog->content = request('content');
-        $blog->user_id = $user->id;
-        $blog->save();
-        return redirect()->route('blog.detail', ['id' => $blog->id]);
+        if ($request->hasFile('thefile')) {
+            $user = \Auth::user();
+            $blog = new Blog;
+            $blog->title = request('title');
+            $blog->content = request('content');
+            $filename=$request->file('thefile')->store('public'); 
+            $blog->image=str_replace('public/','',$filename); 
+            $blog->user_id = $user->id;
+            $blog->save();
+            return redirect()->route('blog.detail', ['id' => $blog->id]);
+        }else{
+            $user = \Auth::user();
+            $blog = new Blog;
+            $blog->title = request('title');
+            $blog->content = request('content');
+            $blog->user_id = $user->id;
+            $blog->save();
+            return redirect()->route('blog.detail', ['id' => $blog->id]);
+        }
     }
 
     /**
@@ -90,11 +103,21 @@ class BlogController extends Controller
      */
     public function update(BlogRequest $request, $id, Blog $blog)
     {
-        $blog = Blog::find($id);
-        $blog->title = request('title');
-        $blog->content = request('content');
-        $blog->save();
-        return redirect()->route('blog.detail', ['id' => $blog->id]);
+        if ($request->hasFile('thefile')) {
+            $blog = Blog::find($id);
+            $blog->title = request('title');
+            $blog->content = request('content');
+            $filename=$request->file('thefile')->store('public'); 
+            $blog->image=str_replace('public/','',$filename);
+            $blog->save();
+            return redirect()->route('blog.detail', ['id' => $blog->id]);
+        }else{
+            $blog = Blog::find($id);
+            $blog->title = request('title');
+            $blog->content = request('content');
+            $blog->save();
+            return redirect()->route('blog.detail', ['id' => $blog->id]);
+        }
     }
 
     /**

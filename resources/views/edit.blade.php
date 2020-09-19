@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
   <h1>記事編集</h1>
-    {{ Form::model($blog,['route' => ['blog.update',$blog->id]]) }}
+    {{ Form::model($blog,['route' => ['blog.update',$blog->id], "enctype"=>"multipart/form-data"]) }}
         <div class='form-group'>
             {{ Form::label('title', 'タイトル:') }}
             {{ Form::text('title', null, array('placeholder' => '40文字まで','maxlength' => 40 )) }}
@@ -10,6 +10,9 @@
                     {{ $errors->first('title') }}
                 </div>
             @endif
+        </div>
+        <div class='form-group'>
+            {{Form::file('thefile')}}
         </div>
         {{ Form::label('content', '本文:') }}
         <div class='form-group'>
