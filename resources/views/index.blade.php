@@ -7,6 +7,7 @@
             <th>投稿者</th><th>タイトル</th><th>投稿日</th>
         </tr>
         @foreach ($blogs as $blog)
+          @if (Auth::user()->name === $blog->user->name)
             <tr>
                 <td>{{ $blog->user->name }}</td>
                 <td>
@@ -16,6 +17,7 @@
                 </td>
                 <td>{{ $blog->created_at }}</td>
             </tr>
+          @endif
         @endforeach
   </table>
   {{ $blogs->links() }}
