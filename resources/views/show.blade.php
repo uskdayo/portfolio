@@ -3,7 +3,11 @@
   <h1>{{ $blog->title }}</h1>
   <div>
         <p>{{ $blog->created_at }}</p>
+        @if ($blog->image !== Null)
         <p><img src="{{ asset('/storage/'.$blog->image)}}" max-width="500px", height="500px"></p>
+        @else
+        <p>NO IMAGE</p>
+        @endif
         <p>{{ $blog->content }}</p>
     </div>
     <div>
