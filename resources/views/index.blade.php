@@ -4,12 +4,13 @@
 
   <table class='table table-striped table-hover'>
         <tr>
-            <th>投稿者</th><th>タイトル</th><th>投稿日</th>
+            <!-- <th>投稿者</th> -->
+            <th>タイトル</th><th>投稿日</th>
         </tr>
         @foreach ($blogs as $blog)
           @if (Auth::user()->name === $blog->user->name)
             <tr>
-                <td>{{ $blog->user->name }}</td>
+                <!-- <td>{{ $blog->user->name }}</td> -->
                 <td>
                     <a href={{ route('blog.detail', ['id' =>  $blog->id]) }}>
                     {{ $blog->title }}
