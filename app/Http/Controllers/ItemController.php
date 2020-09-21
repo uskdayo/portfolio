@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +20,7 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
+        $items = \App\Item::orderBy('created_at', 'desc')->paginate(20);
         return view('items.index', ['items' => $items]);
     }
 
@@ -40,8 +45,10 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $item = new Item;
+        $user = \Auth::user();
         $item->name = request('name');
         $item->category_id = request('category_id');
+        $item->user_id = $user->id;
         $item->save();
         return redirect()->route('items.show', ['id' => $item->id]);
     }
@@ -55,7 +62,13 @@ class ItemController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        return view('items.show', ['item' => $item]);
+        $user = \Auth::user();
+        if ($user) {
+            $login_user_id = $user->id;
+        } else {
+            $login_user_id = "";
+        }
+        return view('items.show', ['item' => $item, 'login_user_id' => $login_user_id]);
     }
 
     /**

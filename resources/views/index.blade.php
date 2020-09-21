@@ -8,7 +8,7 @@
             <th>タイトル</th><th>投稿日</th>
         </tr>
         @foreach ($blogs as $blog)
-          @if (Auth::user()->name === $blog->user->name)
+          @if (Auth::user()->id === $blog->user->id)
             <tr>
                 <!-- <td>{{ $blog->user->name }}</td> -->
                 <td>
