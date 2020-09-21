@@ -2,10 +2,13 @@
 
 @section('content')
     <h1>新しいアイテム登録</h1>
-    {{ Form::open(['route' => 'items.store']) }}
+    {{ Form::open(['route' => 'items.store',"enctype"=>"multipart/form-data"]) }}
         <div class='form-group'>
             {{ Form::label('name', 'アイテム名:') }}
             {{ Form::text('name', null) }}
+        </div>
+        <div class='form-group'>
+            {{Form::file('thefile')}}
         </div>
         <div class='form-group'>
             {{ Form::label('category_id', 'カテゴリ:') }}

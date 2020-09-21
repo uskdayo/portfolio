@@ -4,11 +4,16 @@
 
   <table class='table table-striped table-hover'>
         <tr>
-          <th>カテゴリー</th><th>アイテム名</th>
+        <th>写真</th><th>カテゴリー</th><th>アイテム名</th>
         </tr>
         @foreach ($items as $item)
           @if (Auth::user()->id === $item->user->id)
             <tr>
+                <td>
+                  <a href={{ route('items.show', ['id' =>  $item->id]) }}>
+                  <img src="{{ asset('/storage/'.$item->image)}}" max-width="100px", height="100px">
+                  </a>
+                </td>
                 <td>{{ $item->category->name }}</td>
                 <td>
                   <a href={{ route('items.show', ['id' =>  $item->id]) }}>

@@ -2,10 +2,13 @@
 
 @section('content')
     <h1>{{$item->name}}を編集する</h1>
-    {{ Form::model($item, ['route' => ['items.update', $item->id]]) }}
+    {{ Form::model($item, ['route' => ['items.update', $item->id],"enctype"=>"multipart/form-data"]) }}
         <div class='form-group'>
             {{ Form::label('name', 'アイテム名:') }}
             {{ Form::text('name', null) }}
+        </div>
+        <div class='form-group'>
+            {{Form::file('thefile')}}
         </div>
         <div class='form-group'>
             {{ Form::label('category_id', 'カテゴリ:') }}

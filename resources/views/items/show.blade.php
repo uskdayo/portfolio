@@ -4,6 +4,7 @@
     <h1>{{ $item->name }}</h1>
     <div>
         <p>{{ $item->category->name }}</p>
+        <p><img src="{{ asset('/storage/'.$item->image)}}" max-width="500px", height="500px"></p>
     </div>
     <div>
         <a href={{ route('items.index') }}>一覧に戻る</a>

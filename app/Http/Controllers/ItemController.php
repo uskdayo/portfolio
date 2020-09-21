@@ -44,10 +44,13 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $item = new Item;
         $user = \Auth::user();
         $item->name = request('name');
         $item->category_id = request('category_id');
+        $filename=$request->file('thefile')->store('public'); 
+        $item->image=str_replace('public/','',$filename); 
         $item->user_id = $user->id;
         $item->save();
         return redirect()->route('items.show', ['id' => $item->id]);
@@ -96,6 +99,8 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->name = request('name');
         $item->category_id = request('category_id');
+        $filename=$request->file('thefile')->store('public'); 
+        $item->image=str_replace('public/','',$filename);
         $item->save();
         return redirect()->route('items.show', ['id' => $item->id]);
     }
