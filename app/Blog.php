@@ -20,4 +20,8 @@ class Blog extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function items()
+    {
+    return $this->belongsToMany('App\Item','blog_item');
+    }
 }

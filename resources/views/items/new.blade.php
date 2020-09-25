@@ -3,6 +3,7 @@
 @section('content')
     <h1>新しいアイテム登録</h1>
     {{ Form::open(['route' => 'items.store',"enctype"=>"multipart/form-data"]) }}
+    @csrf
         <div class='form-group'>
             {{ Form::label('name', 'アイテム名:') }}
             {{ Form::text('name', null) }}

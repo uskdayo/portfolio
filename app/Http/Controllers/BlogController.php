@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Item;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 
@@ -32,7 +33,8 @@ class BlogController extends Controller
     public function create()
     {
         $blog = new Blog;
-        return view('new', ['blog' => $blog]);
+        $items = Item::all()->pluck('name', 'id');
+        return view('new', ['blog' => $blog, 'items' => $items]);
     }
 
     /**
@@ -50,6 +52,7 @@ class BlogController extends Controller
             $blog->content = request('content');
             $filename=$request->file('thefile')->store('public'); 
             $blog->image=str_replace('public/','',$filename); 
+            $blog->item_id = request('item_id');
             $blog->user_id = $user->id;
             $blog->save();
             return redirect()->route('blog.detail', ['id' => $blog->id]);
@@ -59,6 +62,7 @@ class BlogController extends Controller
             $blog->title = request('title');
             $blog->content = request('content');
             $blog->user_id = $user->id;
+            $blog->item_id = request('item_id');
             $blog->save();
             return redirect()->route('blog.detail', ['id' => $blog->id]);
         }
@@ -91,7 +95,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
-        return view('edit', ['blog' => $blog]);
+        $items = Item::all()->pluck('name', 'id');
+        return view('new', ['blog' => $blog, 'items' => $items]);
     }
 
     /**
@@ -109,12 +114,14 @@ class BlogController extends Controller
             $blog->content = request('content');
             $filename=$request->file('thefile')->store('public'); 
             $blog->image=str_replace('public/','',$filename);
+            $blog->item_id = request('$item->id');
             $blog->save();
             return redirect()->route('blog.detail', ['id' => $blog->id]);
         }else{
             $blog = Blog::find($id);
             $blog->title = request('title');
             $blog->content = request('content');
+            $blog->item_id = request('$item->id');
             $blog->save();
             return redirect()->route('blog.detail', ['id' => $blog->id]);
         }

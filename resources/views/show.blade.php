@@ -9,6 +9,7 @@
         <p>NO IMAGE</p>
         @endif
         <p>{{ $blog->content }}</p>
+        <p>{{ $blog->item_id }}</p>
     </div>
     <div>
         <a href={{ route('blog.list') }}>一覧に戻る</a>

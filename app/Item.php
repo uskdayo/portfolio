@@ -14,4 +14,8 @@ class Item extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function blogs()
+    {
+    return $this->belongsToMany('App\Blog','blog_item');
+    }
 }

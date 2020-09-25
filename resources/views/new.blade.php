@@ -2,6 +2,7 @@
 @section('content')
   <h1>新規投稿</h1>
     {{ Form::open(['route' => 'blog.store',"enctype"=>"multipart/form-data"]) }}
+    @csrf
         <div class='form-group'>
             {{ Form::label('title', 'タイトル:') }}
             {{ Form::text('title', null, array('placeholder' => '40文字まで','maxlength' => 40 )) }}
@@ -13,6 +14,10 @@
         </div>
         <div class='form-group'>
             {{Form::file('thefile')}}
+        </div>
+        <div class='form-group'>
+            {{ Form::label('item_id', '使用アイテム:') }}
+            {{ Form::select('item_id', $items) }}
         </div>
         {{ Form::label('content', '本文:') }}
         <div class='form-group'>

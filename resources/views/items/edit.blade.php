@@ -3,6 +3,7 @@
 @section('content')
     <h1>{{$item->name}}を編集する</h1>
     {{ Form::model($item, ['route' => ['items.update', $item->id],"enctype"=>"multipart/form-data"]) }}
+    @csrf
         <div class='form-group'>
             {{ Form::label('name', 'アイテム名:') }}
             {{ Form::text('name', null) }}
